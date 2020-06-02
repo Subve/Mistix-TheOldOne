@@ -38,6 +38,13 @@ public:
 		return false;
 
 	}
+	void PurgeResources() {
+		while (m_resources.begin() != m_resources.end()) {
+			delete m_resources.begin()->second.first;
+			m_resources.erase(m_resources.begin());
+		}
+	}
+
 
 private:
 	std::unordered_map<std::string,

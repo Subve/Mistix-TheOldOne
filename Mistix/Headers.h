@@ -16,3 +16,4 @@
 #include"SharedContext.h"
 #include "ResourceManager.h"
 #include "Utilities.h"
+#include "TextureManager.h"

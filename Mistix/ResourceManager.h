@@ -45,10 +45,41 @@ public:
 		}
 	}
 
-
+	T* Load(const std::string& l_path) {
+		return static_cast<Derived*>(this)->Load(l_path);
+	}
+	bool Unload(const std::string& l_id) {
+		auto itr = m_resources.find(l_id);
+		if (itr == m_resources.end()) { return false; }
+		delete itr->first;
+		m_resources.erase(itr);
+		return true;
+	}
+	void LoadPaths(const std::string& l_pathFile) {
+		std::ifstream paths;
+		paths.open(Utils::GetWorkingDirectory() + l_pathFile);
+		if (paths.is_open()) {
+			std::string line;
+			while (std::getline(paths, line)) {
+				std::stringstream keystream(line);
+				std::string pathName;
+				std::string path;
+				keystream >> pathName;
+				keystream >> path;
+				m_paths.emplace(pathName, path);
+			}
+			paths.close();
+			return;
+		}
+		std::cerr << "! Failed loading the path file : " << l_pathFile << std::endl;
+	}
 private:
 	std::unordered_map<std::string,
 		std::pair<T*, unsigned int>> m_resources;
 	std::unordered_map<std::string, std::string> m_paths;
+	std::pair<T*, unsigned int>* Find(const std::string& l_id) {
+		auto itr = m_resources.find(l_id);
+		return (itr != m_resources.end() ? &itr->second : nullptr);
+	}
 
 };

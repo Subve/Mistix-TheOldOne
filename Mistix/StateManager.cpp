@@ -90,6 +90,7 @@ void StateManager::SwitchTo(const StateType& l_type){
 			m_states.erase(itr);
 			m_states.emplace_back(tmp_type, tmp_state);
 			tmp_state->Activate();
+			m_shared->m_wind->GetRenderWindow()->setView(tmp_state->GetView());
 			return;
 		}
 	}
@@ -111,6 +112,8 @@ void StateManager::CreateState(const StateType& l_type){
 	if (newState == m_stateFactory.end()){ return; }
 	BaseState* state = newState->second();
 	m_states.emplace_back(l_type, state);
+	BaseState* state = newState->second();
+	state->m_view = m_shared->m_wind->GetRenderWindow()->getDefaultView();
 	state->OnCreate();
 }
 

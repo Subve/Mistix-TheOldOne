@@ -49,7 +49,7 @@ void StateManager::Draw(){
 			--itr;
 		}
 		for (; itr != m_states.end(); ++itr){
-			itr->second->Draw();
+			m_shared->m_wind->GetRenderWindow()->setView(itr->second->GetView());
 		}
 	} else {
 		m_states.back().second->Draw();
@@ -99,6 +99,7 @@ void StateManager::SwitchTo(const StateType& l_type){
 	if (!m_states.empty()){ m_states.back().second->Deactivate(); }
 	CreateState(l_type);
 	m_states.back().second->Activate();
+	m_shared->m_wind->GetRenderWindow()->setView(m_states.back().second->GetView());
 }
 
 void StateManager::Remove(const StateType& l_type){

@@ -21,5 +21,4 @@
 #include "Directions.h"
 #include "Anim_Base.h"
 #include "Anim_Directional.h"
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
+

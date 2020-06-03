@@ -5,6 +5,7 @@
 #include "State_MainMenu.h"
 #include "State_Game.h"
 #include "State_Paused.h"
+
 #include "SharedContext.h"
 
 enum class StateType{ Intro = 1, MainMenu, Game, Paused, GameOver, Credits };

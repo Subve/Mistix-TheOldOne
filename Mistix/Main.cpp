@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "Headers.h"
+
 void main(int argc, void** argv[]){
 	// Program entry point.
 	Game game;
